@@ -1,1 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saul's Hot Dogs - San José</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            color: #333;
+            overflow-x: hidden;
+            background: #f8f8f8;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .logo-img {
+            height: 45px;
+            width: auto;
+            opacity: 0.9;
+            transition: opacity 0.3s;
+        }
+
+        .logo-img:hover {
+            opacity: 1;
+        }
+
+        .brand-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: #1a1a1a;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-left: 2rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: #d32f2f;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #d32f2f;
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem;
+                flex-wrap: wrap;
+            }
+
+            .brand-name {
+                font-size: 1.1rem;
+            }
+
+            nav a {
+                font-size: 0.85rem;
+                margin-left: 1rem;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+            padding-top: 60px;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .hero-logo {
+            height: 120px;
+            width: auto;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+            letter-spacing: -2px;
+            animation: fadeInUp 0.8s ease-out 0.1s both;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: #666;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+            font-weight: 300;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 0.9rem 2.5rem;
+            background: #d32f2f;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(211, 47, 47, 0.3);
+            animation: fadeInUp 0.8s ease-out 0.3s both;
+        }
+
+        .cta-button:hover {
+            background: #b71c1c;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(211, 47, 47, 0.4);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .hero-logo {
+                height: 80px;
+            }
+        }
+
+        /* Parallax Sections */
+        .parallax-section {
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .parallax-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            z-index: 1;
+        }
+
+        .parallax-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2;
+        }
+
+        .parallax-content {
+            position: relative;
+            z-index: 3;
+            max-width: 700px;
+            padding: 3rem;
+            text-align: center;
+            color: white;
+        }
+
+        .parallax-content h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        .parallax-content p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        @media (max-width: 768px) {
+            .parallax-content h2 {
+                font-size: 2rem;
+            }
+
+            .parallax-content p {
+                font-size: 1rem;
+            }
+
+            .parallax-content {
+                padding: 2rem;
+            }
+        }
+
+        /* About Section */
+        .about {
+            background: #ffffff;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            color: #1a1a1a;
+        }
+
+        .about p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Services Section */
+        .services {
+            background: #f8f8f8;
+            padding: 6rem 2rem;
+        }
+
+        .services-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .services h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: #1a1a1a;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .service-card h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+        }
+
+        .service-card p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #666;
+        }
+
+        /* Location Section */
+        .location {
+            background: #ffffff;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .location-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .location h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            color: #1a1a1a;
+        }
+
+        .location-box {
+            background: #f8f8f8;
+            padding: 2.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #d32f2f;
+        }
+
+        .location-box p {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 1rem;
+        }
+
+        .location-box strong {
+            color: #1a1a1a;
+            font-weight: 700;
+        }
+
+        .hours {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #ddd;
+        }
+
+        .hours p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+            opacity: 0.8;
+        }
+
+        footer a {
+            color: #d32f2f;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        footer a:hover {
+            opacity: 0.7;
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            z-index: 5;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        .scroll-arrow {
+            width: 30px;
+            height: 30px;
+            border: 2px solid #d32f2f;
+            border-top: none;
+            border-right: none;
+            transform: rotate(-45deg);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo-container">
+            <svg class="logo-img" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <g stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <!-- Hot dog cart awning -->
+                    <rect x="55" y="30" width="90" height="20" rx="4"/>
+                    <path d="M 60 50 Q 65 45 70 50 Q 75 45 80 50 Q 85 45 90 50 Q 95 45 100 50 Q 105 45 110 50 Q 115 45 120 50 Q 125 45 130 50 Q 135 45 140 50"/>
+                    
+                    <!-- Cart base -->
+                    <rect x="50" y="50" width="100" height="60" rx="3"/>
+                    
+                    <!-- Wheel -->
+                    <circle cx="75" cy="115" r="15"/>
+                    <circle cx="75" cy="115" r="8" fill="none"/>
+                    <circle cx="125" cy="115" r="15"/>
+                    <circle cx="125" cy="115" r="8" fill="none"/>
+                    
+                    <!-- Cooking surface -->
+                    <rect x="60" y="55" width="80" height="12" rx="2"/>
+                    <path d="M 62 67 L 138 67" stroke-dasharray="4,2"/>
+                    
+                    <!-- Hot dogs on grill -->
+                    <rect x="68" y="60" width="4" height="10" rx="2"/>
+                    <rect x="78" y="60" width="4" height="10" rx="2"/>
+                    <rect x="88" y="60" width="4" height="10" rx="2"/>
+                    <rect x="98" y="60" width="4" height="10" rx="2"/>
+                    <rect x="108" y="60" width="4" height="10" rx="2"/>
+                    <rect x="118" y="60" width="4" height="10" rx="2"/>
+                    
+                    <!-- Condiment bottles -->
+                    <rect x="65" y="70" width="5" height="12" rx="1"/>
+                    <rect x="75" y="70" width="5" height="12" rx="1"/>
+                </g>
+            </svg>
+            <span class="brand-name">Saul's</span>
+        </div>
+        <div style="display: flex; gap: 2rem;">
+            <a href="#catering">Catering</a>
+            <a href="#services">Services</a>
+            <a href="#location">Location</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1555939594-58d7cb561ea1?w=1200&q=80');"></div>
+        <div class="hero-content">
+            <svg class="hero-logo" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <g stroke="#333" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="55" y="30" width="90" height="20" rx="4"/>
+                    <path d="M 60 50 Q 65 45 70 50 Q 75 45 80 50 Q 85 45 90 50 Q 95 45 100 50 Q 105 45 110 50 Q 115 45 120 50 Q 125 45 130 50 Q 135 45 140 50"/>
+                    <rect x="50" y="50" width="100" height="60" rx="3"/>
+                    <circle cx="75" cy="115" r="15"/>
+                    <circle cx="75" cy="115" r="8" fill="none"/>
+                    <circle cx="125" cy="115" r="15"/>
+                    <circle cx="125" cy="115" r="8" fill="none"/>
+                    <rect x="60" y="55" width="80" height="12" rx="2"/>
+                    <path d="M 62 67 L 138 67" stroke-dasharray="4,2"/>
+                    <rect x="68" y="60" width="4" height="10" rx="2"/>
+                    <rect x="78" y="60" width="4" height="10" rx="2"/>
+                    <rect x="88" y="60" width="4" height="10" rx="2"/>
+                    <rect x="98" y="60" width="4" height="10" rx="2"/>
+                    <rect x="108" y="60" width="4" height="10" rx="2"/>
+                    <rect x="118" y="60" width="4" height="10" rx="2"/>
+                    <rect x="65" y="70" width="5" height="12" rx="1"/>
+                    <rect x="75" y="70" width="5" height="12" rx="1"/>
+                </g>
+            </svg>
+            <h1>Saul's Hot Dogs</h1>
+            <p>Gourmet Hot Dogs & Professional Catering</p>
+            <a href="#catering" class="cta-button">Explore Our Services</a>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- Catering Section -->
+    <section class="parallax-section" id="catering">
+        <div class="parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1555939594-58d7cb561ea1?w=1200&q=80');"></div>
+        <div class="parallax-overlay"></div>
+        <div class="parallax-content">
+            <h2>Catering for Every Event</h2>
+            <p>From corporate gatherings to intimate celebrations, we bring our gourmet hot dog experience to every corner of the San Francisco Bay Area. Let us elevate your event with delicious, high-quality fare that guests will remember.</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <div class="about-content">
+            <h2>About Saul's</h2>
+            <p>Saul's Hot Dogs is your premier gourmet hot dog destination in San José. We pride ourselves on quality ingredients, innovative toppings, and exceptional service that brings people together.</p>
+            <p>Whether you're grabbing a quick lunch at our main location or booking us for your next big event, every bite is crafted with care and passion.</p>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="services-container">
+            <h2>Our Services</h2>
+            <div class="service-grid">
+                <div class="service-card">
+                    <h3>🍡 Food Truck Service</h3>
+                    <p>Mobile catering for festivals, markets, and street events across the Bay Area. Fresh, hot, and ready to serve.</p>
+                </div>
+                <div class="service-card">
+                    <h3>🎉 Event Catering</h3>
+                    <p>Full-service catering for weddings, corporate events, birthdays, and private celebrations throughout the entire Bay Area.</p>
+                </div>
+                <div class="service-card">
+                    <h3>🏢 Corporate Lunch</h3>
+                    <p>Professional catering solutions for office events, team building, and corporate gatherings with customizable menu options.</p>
+                </div>
+                <div class="service-card">
+                    <h3>⚽ Sports Events</h3>
+                    <p>Perfect for game day tailgates, tournaments, and sports gatherings. We keep your crowd fed and happy.</p>
+                </div>
+                <div class="service-card">
+                    <h3>🎓 Community Events</h3>
+                    <p>School fundraisers, block parties, charity events, and community gatherings in the San Francisco Bay Area.</p>
+                </div>
+                <div class="service-card">
+                    <h3>🌮 Custom Menus</h3>
+                    <p>Personalized hot dog creations and custom menu planning tailored to your event and preferences.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Food Scene Section -->
+    <section class="parallax-section">
+        <div class="parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1504674900152-b8b3b3d3efff?w=1200&q=80');"></div>
+        <div class="parallax-overlay"></div>
+        <div class="parallax-content">
+            <h2>Bay Area's Food Culture</h2>
+            <p>We celebrate the rich culinary traditions of the Silicon Valley and greater San Francisco Bay Area. From local farmers markets to iconic street food, we bring regional flavors to every hot dog.</p>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section class="location" id="location">
+        <div class="location-content">
+            <h2>Visit Us</h2>
+            <div class="location-box">
+                <p><strong>Main Location</strong></p>
+                <p>San Fernando St & 1st Street</p>
+                <p>San José, CA</p>
+                <div class="hours">
+                    <p><strong>Friday & Saturday</strong></p>
+                    <p>Open for Dine-In Service</p>
+                    <p style="font-size: 0.95rem; color: #999; margin-top: 1rem;">Available for Catering & Events Throughout the Bay Area Every Day</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="parallax-section">
+        <div class="parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1504674900152-b8b3b3d3efff?w=1200&q=80');"></div>
+        <div class="parallax-overlay" style="background: rgba(0, 0, 0, 0.6);"></div>
+        <div class="parallax-content">
+            <h2>Ready to Elevate Your Event?</h2>
+            <p>Contact us today to book our catering service for your next gathering. We serve all locations throughout the San Francisco Bay Area.</p>
+            <a href="mailto:contact@saulshot dogs.com" class="cta-button" style="margin-top: 2rem;">Get in Touch</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Saul's Hot Dogs. All rights reserved.</p>
+        <p>Serving the San Francisco Bay Area with gourmet hot dogs and professional catering.</p>
+        <p>San Fernando St & 1st Street, San José, CA | <a href="mailto:contact@saulshot dogs.com">contact@saulshot dogs.com</a></p>
+    </footer>
+
+    <script>
+        // Smooth scroll behavior for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Parallax effect enhancement
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            document.querySelectorAll('.parallax-bg').forEach((el, index) => {
+                if (el.offsetParent !== null) {
+                    const yPos = scrolled * 0.5;
+                    el.style.backgroundPosition = `center ${yPos}px`;
+                }
+            });
+        });
+
+        // Fade in effect on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
 
